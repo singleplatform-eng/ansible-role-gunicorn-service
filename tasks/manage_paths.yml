@@ -1,0 +1,17 @@
+---
+
+- name: Create Gunicorn Configuration Directory
+  file:
+    path: "{{gunicorn_config_dir}}"
+    owner: root
+    group: root
+    mode: 0750
+    state: directory
+
+- name: Create Gunicorn Log Directory
+  file:
+    path: "{{gunicorn_config_dir}}"
+    owner: "{{gunicorn_user}}"
+    group: "{{gunicorn_group}}"
+    mode: 0750
+    state: directory

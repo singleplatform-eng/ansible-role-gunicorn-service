@@ -1,0 +1,11 @@
+---
+
+gunicorn_config_dir: /etc/gunicorn
+gunicorn_log_dir: /var/log/gunicorn
+default_python_path: /usr/bin/python
+gunicorn_path: "{{python_path|default(default_python_path)}}/bin/gunicorn"
+
+gunicorn_user: gunicorn
+gunicorn_group: gunicorn
+
+gunicorn_service_name: gunicorn

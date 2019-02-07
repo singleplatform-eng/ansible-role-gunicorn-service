@@ -1,0 +1,8 @@
+---
+
+- name: Enable Gunicorn Services
+
+- name: Start Gunicorn Services
+
+- name: Stop Gunicorn Services
+

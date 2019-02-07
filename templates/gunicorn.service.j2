@@ -1,0 +1,21 @@
+[Unit]
+Description={{service_name}} gunicorn daemon
+After=network.target
+
+[Service]
+PIDFile=gunicorn/{{service_name}}.pid
+User={{user}}
+Group={{group| default(user)}}
+RuntimeDirectory=gunicorn
+WorkingDirectory={{app_dir}}
+EnvironmentFile={{gunicorn_config_dir}}/{{service_name}}.env
+ExecStart={{python_path}}/bin/python {{gunicorn_path}}/bin/gunicorn --pid $RUNTIME_DIRECTORY/{{service_name}}.pid   \
+          --bind {{bind_port}} {{wsgi_module_name}} {{ reload|default('')}} \
+	  {%- if num_procs -%} -w {{num_procs}} {%- endif %} -t {{app_read_timeout}} \
+	  --access-logfile={{logfile}} --worker-tmp-dir={{tmp_dir}}
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
