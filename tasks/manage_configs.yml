@@ -1,0 +1,10 @@
+---
+
+- name: Manage Gunicorn Service Template
+  template:
+    src: templates/gunicorn.service.j2
+    dest: "{{gunicorn_config_dir}}/{{gunicorn_service_name}}.service"
+    owner: root
+    group: root
+    mode: 0644
+  register: gunicorn_service_unit_result

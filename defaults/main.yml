@@ -2,15 +2,17 @@
 
 gunicorn_config_dir: /etc/gunicorn
 gunicorn_log_dir: /var/log/gunicorn
+gunicorn_systemd_service_dir: /etc/systemd/system
 gunicorn_access_logfile: "$LOGS_DIRECTORY/access.log"
 gunicorn_python_path: /usr
 
 gunicorn_tmp_dir: /run/lock
 gunicorn_read_timeout: 60
 gunicorn_user: gunicorn
-gunicorn_group: gunicorn
 
 gunicorn_service_name: gunicorn
 gunicorn_bind_port: '127.0.0.1:8000'
 
 gunicorn_start_command: "{{gunicorn_python_path}}/bin/gunicorn"
+gunicorn_install_service: true
+gunicorn_enable_service: false

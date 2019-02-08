@@ -5,7 +5,7 @@ After=network.target
 [Service]
 PIDFile=gunicorn/{{gunicorn_service_name}}.pid
 User={{gunicorn_user}}
-Group={{gunicorn_group| default(user)}}
+Group={{gunicorn_group| default(gunicorn_user)}}
 RuntimeDirectory=gunicorn
 WorkingDirectory={{gunicorn_app_dir}}
 EnvironmentFile={{gunicorn_config_dir}}/{{gunicorn_service_name}}.env

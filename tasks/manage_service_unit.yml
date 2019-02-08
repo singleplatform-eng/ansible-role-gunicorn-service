@@ -1,0 +1,22 @@
+---
+
+- block:
+  - name: Link Service Unit
+    file:
+      src: "{{gunicorn_config_dir}}/{{gunicorn_service_name}}.service"
+      dest: "{{gunicorn_systemd_service_dir}}/{{gunicorn_service_name}}.service"
+      owner: root
+      group: root
+
+  - name: Reload systemd Daemon for gunicorn changes
+    systemd:
+     daemon_reload: yes
+    when: gunicorn_service_unit_result is changed
+
+  - name: Enable Service
+    systemd:
+      name: "{{gunicorn_service_name}}.service"
+      enabled: "{{gunicorn_enable_service}}"
+      state: "{{gunicorn_state}}"
+    when: gunicorn_enable_service
+  when: gunicorn_install_service

@@ -1,11 +1,10 @@
 ---
 
-- name: Manage Gunicorn Paths
+- name: Manage Directories
+  include_tasks: manage_paths.yml
 
+- name: Manage Config Files
+  include_tasks: manage_configs.yml
 
-- name: Manage Gunicorn Service Template
-
-
-- name: Manage Gunicorn Environment Files
-
-
+- name: Manage systemd Service Unit
+  include_tasks: manage_service_unit.yml

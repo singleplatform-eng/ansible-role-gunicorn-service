@@ -10,8 +10,8 @@
 
 - name: Create Gunicorn Log Directory
   file:
-    path: "{{gunicorn_config_dir}}"
+    path: "{{gunicorn_log_dir}}"
     owner: "{{gunicorn_user}}"
-    group: "{{gunicorn_group}}"
+    group: "{{gunicorn_group|default(gunicorn_user)}}"
     mode: 0750
     state: directory
