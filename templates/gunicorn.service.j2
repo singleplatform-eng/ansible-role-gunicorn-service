@@ -3,16 +3,16 @@ Description={{gunicorn_service_name}} gunicorn daemon
 After=network.target
 
 [Service]
-PIDFile=gunicorn/{{gunicorn_service_name}}.pid
+PIDFile=/run/%t/{{gunicorn_service_name}}.pid
 User={{gunicorn_user}}
 Group={{gunicorn_group| default(gunicorn_user)}}
 RuntimeDirectory=gunicorn
 WorkingDirectory={{gunicorn_app_dir}}
 EnvironmentFile={{gunicorn_config_dir}}/{{gunicorn_service_name}}.env
-ExecStart={{gunicorn_start_command}} --pid $RUNTIME_DIRECTORY/{{gunicorn_service_name}}.pid   \
+ExecStart={{gunicorn_start_command}} --pid %t/gunicorn/{{gunicorn_service_name}}.pid   \
           --bind {{gunicorn_bind_port}} {{gunicorn_wsgi_module_name}} {{ reload|default('')}} \
 	  {% if gunicorn_worker_count is defined -%} -w {{gunicorn_worker_count}} {%- endif %} -t {{gunicorn_read_timeout}} \
-	  --access-logfile={{gunicorn_access_logfile}} --worker-tmp-dir={{gunicorn_tmp_dir}}
+	  --access-logfile={{gunicorn_access_logfile}} --worker-tmp-dir=/tmp
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true
