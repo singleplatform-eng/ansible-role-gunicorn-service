@@ -11,6 +11,7 @@
   - name: Reload systemd Daemon for gunicorn changes
     systemd:
      daemon_reload: yes
+    changed_when: True
     when: gunicorn_service_unit_result is changed
 
   - name: Enable Service
