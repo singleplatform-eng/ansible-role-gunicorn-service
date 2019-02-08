@@ -1,8 +1,21 @@
 ---
 
-- name: Enable Gunicorn Services
+- name: "Start {{gunicorn_service_name}}.service"
+  systemd:
+    name: "{{gunicorn_service_name}}.service"
+    state: started
 
-- name: Start Gunicorn Services
+- name: "Stop {{gunicorn_service_name}}.service"
+  systemd:
+    name: "{{gunicorn_service_name}}.service"
+    state: stopped
 
-- name: Stop Gunicorn Services
+- name: "Restart {{gunicorn_service_name}}.service"
+  systemd:
+    name: "{{gunicorn_service_name}}.service"
+    state: restarted
 
+- name: "Reload {{gunicorn_service_name}}.service"
+  systemd:
+    name: "{{gunicorn_service_name}}.service"
+    state: reloaded
