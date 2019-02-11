@@ -15,7 +15,38 @@
         home: /home/gunicorn
         create_home: yes
 
+    - name: curl
+      package:
+        name: curl
+
+    - name: pip
+      pip:
+        name: gunicorn
+
 - hosts: localhost
   remote_user: root
   roles:
-    - { role: role_under_test, gunicorn_app_dir: /home/gunicorn, gunicorn_wsgi_module_name: test }
+    - { role: role_under_test, gunicorn_app_dir: /etc/ansible/roles/role_under_test/tests, gunicorn_wsgi_module_name: 'test:application', gunicorn_start_command: '/usr/local/bin/gunicorn' }
+
+  tasks:
+    - name: Test service handlers
+      block:
+        - name: start
+          command: echo starting gunicorn
+          changed_when: False
+          notify: Start gunicorn.service
+
+        - meta: flush_handlers
+
+        - name: stop
+          command: echo stopping gunicorn
+          changed_when: False
+          notify: Stop gunicorn.service
+
+        - meta: flush_handlers
+
+        - name: restart
+          command: echo restarting gunicorn
+          changed_when: False
+          notify: Restart gunicorn.service
+      when: test_handlers is defined
