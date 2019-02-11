@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/singleplatform-eng/ansible-role-gunicorn-service.svg?branch=master)](https://travis-ci.org/singleplatform-eng/ansible-role-gunicorn-service)
+
 Gunicorn
 =========
 
