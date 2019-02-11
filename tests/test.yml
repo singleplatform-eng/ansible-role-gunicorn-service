@@ -1,5 +1,21 @@
 ---
+
+- hosts: localhost
+  remote_user: root
+  tasks:
+    - name: group
+      group:
+        name: gunicorn
+        gid: 10000
+    - name: user
+      user:
+        name: gunicorn
+        group: gunicorn
+        password: !
+        home: /home/gunicorn
+        create_home: yes
+
 - hosts: localhost
   remote_user: root
   roles:
-    - role_under_test
+    - { role: role_under_test, gunicorn_app_dir: /home/gunicorn, gunicorn_wsgi_module_name: test }
