@@ -33,20 +33,17 @@
       block:
         - name: start
           command: echo starting gunicorn
-          changed_when: False
           notify: Start gunicorn.service
 
         - meta: flush_handlers
 
         - name: stop
           command: echo stopping gunicorn
-          changed_when: False
           notify: Stop gunicorn.service
 
         - meta: flush_handlers
 
         - name: restart
           command: echo restarting gunicorn
-          changed_when: False
           notify: Restart gunicorn.service
       when: test_handlers is defined
