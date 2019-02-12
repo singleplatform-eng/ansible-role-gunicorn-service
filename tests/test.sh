@@ -43,9 +43,6 @@ fi
 
 printf "\n"
 
-# Make Apt installs available
-docker exec --tty $container_id env TERM=xterm apt-get update
-
 # Test Ansible syntax.
 printf ${green}"Checking Ansible playbook syntax."${neutral}
 docker exec --tty $container_id env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/$playbook --syntax-check
@@ -66,12 +63,10 @@ tail $idempotence \
   || (printf ${red}'Idempotence test: fail'${neutral}"\n" && exit 1)
 
 
-printf ${green}"Testing Start Handler"${neutral}
-docker exec $container_id ansible-playbook /etc/ansible/roles/role_under_test/tests/$playbook -e 'test_handlers=True'
+printf ${green}"Testing Start Handlers and Service\n"${neutral}
+docker exec $container_id ansible-playbook /etc/ansible/roles/role_under_test/tests/$playbook -e 'test_handlers=True test_service=True'
+printf ${green}"Handlers and Service test passed\n"${neutra}
 
-
-printf ${green}"Testing Service"${neutral}
-docker exec $container_id ansible-playbook /etc/ansible/roles/role_under_test/tests/test_service.yml
 
 # Remove the Docker container (if configured).
 if [ "$cleanup" = true ]; then

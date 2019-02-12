@@ -47,3 +47,17 @@
           command: echo restarting gunicorn
           notify: Restart gunicorn.service
       when: test_handlers is defined
+
+- hosts: localhost
+  remote_user: root
+  tasks:
+    - name: service tests
+      block:
+        - name: Curl self
+          command: curl localhost:8000
+          changed_when: False
+          register: curled
+
+        - name: Test curl output
+          assert: { that: "curled.stdout == 'Hello World'" }
+      when: test_services is defined
