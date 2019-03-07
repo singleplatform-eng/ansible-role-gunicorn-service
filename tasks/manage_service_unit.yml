@@ -19,6 +19,6 @@
     systemd:
       name: "{{gunicorn_service_name}}.service"
       enabled: "{{gunicorn_enable_service}}"
-      state: "{{gunicorn_state}}"
+      state: "{{gunicorn_state|default('stopped')}}"
     when: gunicorn_enable_service
   when: gunicorn_install_service
