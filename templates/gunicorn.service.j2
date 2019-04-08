@@ -6,6 +6,9 @@ After=network.target
 PIDFile=/run/%t/{{gunicorn_service_name}}.pid
 User={{gunicorn_user}}
 Group={{gunicorn_group| default(gunicorn_user)}}
+{% if gunicorn_service_restart is defined -%}
+Restart={{gunicorn_service_restart}}
+{% endif %}
 RuntimeDirectory=gunicorn
 WorkingDirectory={{gunicorn_app_dir}}
 EnvironmentFile={{gunicorn_config_dir}}/{{gunicorn_service_name}}.env
