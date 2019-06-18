@@ -41,6 +41,7 @@ gunicorn_app_dir
 gunicorn_wsgi_module_name
 gunicorn_state - when gunicorn_enable_service=True
 ```
+Note that environment variables that need to be enclosed by quotes should have them explicitly defined.
 
 Dependencies
 ------------
