@@ -14,7 +14,7 @@ WorkingDirectory={{gunicorn_app_dir}}
 EnvironmentFile={{gunicorn_config_dir}}/{{gunicorn_service_name}}.env
 ExecStart={{gunicorn_start_command}} --pid %t/gunicorn/{{gunicorn_service_name}}.pid   \
           --bind {{gunicorn_bind_port}} {{gunicorn_wsgi_module_name}} {{ reload|default('')}} \
-	  {% if gunicorn_worker_count is defined -%} -w {{gunicorn_worker_count}} {%- endif %} -t {{gunicorn_read_timeout}} \
+	  {% if gunicorn_worker_count is defined -%} -w {{gunicorn_worker_count}} {%- endif %} -t {{gunicorn_read_timeout}} {% if gunicorn_max_requests is defined -%} --max-requests {{gunicorn_max_requests}} {%- endif %} {% if gunicorn_max_requests_jitter is defined -%} --max-requests-jitter {{gunicorn_max_requests_jitter}} {%- endif %} \
 	  --access-logfile={{gunicorn_access_logfile}} --worker-tmp-dir=/tmp
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
