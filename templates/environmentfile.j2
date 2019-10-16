@@ -5,3 +5,8 @@
 {{k}}={{v | replace('\n', '\\n')}}
 {% endif %}
 {% endfor %}
+{% if service_global_env is defined %}
+{% for k, v in service_global_env.items()|sort %}
+{{k}}={{v}}
+{% endfor %}
+{% endif %}

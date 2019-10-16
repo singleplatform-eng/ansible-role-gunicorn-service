@@ -43,6 +43,8 @@ gunicorn_state - when gunicorn_enable_service=True
 ```
 Note that environment variables that need to be enclosed by quotes should have them explicitly defined.
 
+In addition, since systemd units are only capable of reading a single EnvironmentFile, if global Environment Variables are for both celery and non-celery service units - you may optionally define a variable "service_global_env" dictionary of those Environment Variables that will be additionally appended to the Celery Systemd Service Unit.
+
 Dependencies
 ------------
 
