@@ -4,18 +4,22 @@
   systemd:
     name: "{{gunicorn_service_name}}.service"
     state: started
+  listen: "start application"
 
 - name: "stop {{gunicorn_service_name}}.service"
   systemd:
     name: "{{gunicorn_service_name}}.service"
     state: stopped
+  listen: "stop application"
 
 - name: "restart {{gunicorn_service_name}}.service"
   systemd:
     name: "{{gunicorn_service_name}}.service"
     state: restarted
+  listen: "restart application"
 
 - name: "reload {{gunicorn_service_name}}.service"
   systemd:
     name: "{{gunicorn_service_name}}.service"
     state: reloaded
+  listen: "reload application"
