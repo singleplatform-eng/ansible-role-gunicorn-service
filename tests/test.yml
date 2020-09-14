@@ -31,21 +31,21 @@
   tasks:
     - name: Test service handlers
       block:
-        - name: start
+        - name: Start
           command: echo starting gunicorn
-          notify: Start gunicorn.service
+          notify: start gunicorn.service
 
         - meta: flush_handlers
 
-        - name: stop
+        - name: Stop
           command: echo stopping gunicorn
-          notify: Stop gunicorn.service
+          notify: stop gunicorn.service
 
         - meta: flush_handlers
 
-        - name: restart
+        - name: Restart
           command: echo restarting gunicorn
-          notify: Restart gunicorn.service
+          notify: restart gunicorn.service
       when: test_handlers is defined
 
 - hosts: localhost

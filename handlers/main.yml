@@ -1,21 +1,21 @@
 ---
 
-- name: "Start {{gunicorn_service_name}}.service"
+- name: "start {{gunicorn_service_name}}.service"
   systemd:
     name: "{{gunicorn_service_name}}.service"
     state: started
 
-- name: "Stop {{gunicorn_service_name}}.service"
+- name: "stop {{gunicorn_service_name}}.service"
   systemd:
     name: "{{gunicorn_service_name}}.service"
     state: stopped
 
-- name: "Restart {{gunicorn_service_name}}.service"
+- name: "restart {{gunicorn_service_name}}.service"
   systemd:
     name: "{{gunicorn_service_name}}.service"
     state: restarted
 
-- name: "Reload {{gunicorn_service_name}}.service"
+- name: "reload {{gunicorn_service_name}}.service"
   systemd:
     name: "{{gunicorn_service_name}}.service"
     state: reloaded
