@@ -1,9 +1,9 @@
 [Unit]
-Description={{gunicorn_service_name}} gunicorn daemon
+Description=gunicorn daemon
 After=network.target
 
 [Service]
-PIDFile=/run/%t/{{gunicorn_service_name}}.pid
+PIDFile=/run/%t/gunicorn.pid
 User={{gunicorn_user}}
 Group={{gunicorn_group| default(gunicorn_user)}}
 {% if gunicorn_service_restart is defined -%}
@@ -11,8 +11,8 @@ Restart={{gunicorn_service_restart}}
 {% endif %}
 RuntimeDirectory=gunicorn
 WorkingDirectory={{gunicorn_app_dir}}
-EnvironmentFile={{gunicorn_config_dir}}/{{gunicorn_service_name}}.env
-ExecStart={{gunicorn_start_command}} --pid %t/gunicorn/{{gunicorn_service_name}}.pid   \
+EnvironmentFile={{gunicorn_config_dir}}/gunicorn.env
+ExecStart={{gunicorn_start_command}} --pid %t/gunicorn/gunicorn.pid   \
           --bind {{gunicorn_bind_port}} {{gunicorn_wsgi_module_name}} {{ reload|default('')}} \
 	  {% if gunicorn_worker_count is defined -%} -w {{gunicorn_worker_count}} {%- endif %} -t {{gunicorn_read_timeout}} \
           {% if gunicorn_max_requests is defined -%} --max-requests {{gunicorn_max_requests}}{%- endif %} \

@@ -3,7 +3,7 @@
 - name: Manage Gunicorn Service Environment File
   template:
     src: templates/environmentfile.j2
-    dest: "{{gunicorn_config_dir}}/{{gunicorn_service_name}}.env"
+    dest: "{{gunicorn_config_dir}}/gunicorn.env"
     owner: root
     group: root
     mode: 0644
@@ -11,7 +11,7 @@
 - name: Manage Gunicorn Service Template
   template:
     src: templates/gunicorn.service.j2
-    dest: "{{gunicorn_config_dir}}/{{gunicorn_service_name}}.service"
+    dest: "{{gunicorn_config_dir}}/gunicorn.service"
     owner: root
     group: root
     mode: 0644

@@ -10,7 +10,6 @@ gunicorn_tmp_dir: /run/lock
 gunicorn_read_timeout: 60
 gunicorn_user: gunicorn
 
-gunicorn_service_name: gunicorn
 gunicorn_bind_port: '127.0.0.1:8000'
 
 gunicorn_start_command: "{{gunicorn_python_path}}/bin/gunicorn"

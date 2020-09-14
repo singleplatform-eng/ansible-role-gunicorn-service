@@ -1,25 +1,25 @@
 ---
 
-- name: "start {{gunicorn_service_name}}.service"
+- name: "start gunicorn service"
   systemd:
-    name: "{{gunicorn_service_name}}.service"
+    name: "gunicorn.service"
     state: started
   listen: "start application"
 
-- name: "stop {{gunicorn_service_name}}.service"
+- name: "stop gunicorn service"
   systemd:
-    name: "{{gunicorn_service_name}}.service"
+    name: "gunicorn.service"
     state: stopped
   listen: "stop application"
 
-- name: "restart {{gunicorn_service_name}}.service"
+- name: "restart gunicorn service"
   systemd:
-    name: "{{gunicorn_service_name}}.service"
+    name: "gunicorn.service"
     state: restarted
   listen: "restart application"
 
-- name: "reload {{gunicorn_service_name}}.service"
+- name: "reload gunicorn service"
   systemd:
-    name: "{{gunicorn_service_name}}.service"
+    name: "gunicorn.service"
     state: reloaded
   listen: "reload application"

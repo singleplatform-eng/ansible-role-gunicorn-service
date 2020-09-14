@@ -3,8 +3,8 @@
 - block:
   - name: Link Service Unit
     file:
-      src: "{{gunicorn_config_dir}}/{{gunicorn_service_name}}.service"
-      dest: "{{gunicorn_systemd_service_dir}}/{{gunicorn_service_name}}.service"
+      src: "{{gunicorn_config_dir}}/gunicorn.service"
+      dest: "{{gunicorn_systemd_service_dir}}/gunicorn.service"
       owner: root
       group: root
       state: link
@@ -17,7 +17,7 @@
 
   - name: Enable Service
     systemd:
-      name: "{{gunicorn_service_name}}.service"
+      name: "gunicorn.service"
       enabled: "{{gunicorn_enable_service}}"
       state: "{{gunicorn_state|default('stopped')}}"
     when: gunicorn_enable_service
