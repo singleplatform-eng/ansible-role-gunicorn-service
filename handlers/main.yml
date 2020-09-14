@@ -5,21 +5,25 @@
     name: "gunicorn.service"
     state: started
   listen: "start application"
+  when: gunicorn_substack
 
 - name: "stop gunicorn service"
   systemd:
     name: "gunicorn.service"
     state: stopped
   listen: "stop application"
+  when: gunicorn_substack
 
 - name: "restart gunicorn service"
   systemd:
     name: "gunicorn.service"
     state: restarted
   listen: "restart application"
+  when: gunicorn_substack
 
 - name: "reload gunicorn service"
   systemd:
     name: "gunicorn.service"
     state: reloaded
   listen: "reload application"
+  when: gunicorn_substack
