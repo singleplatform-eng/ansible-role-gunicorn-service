@@ -1,4 +1,4 @@
-{{ansible_managed}}
+# {{ansible_managed}}
 {% for k, v in gunicorn_environment.items()|sort %}
 {% if '__omit_place_holder__' not in v|string %}
 {# truncate newlines to literal \n #}
